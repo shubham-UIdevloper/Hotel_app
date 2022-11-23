@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Online Booking</title>
+    <link rel="stylesheet" href="../Node_Modules/bootstrap-icons/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="../Node_Modules/bootstrap/dist/css/bootstrap.css">
+    <!-- JavaScript Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3" crossorigin="anonymous"></script>
+    <!-- CSS only -->
+     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
+     <link rel="shorcut icon" href="https://upload.wikimedia.org/wikipedia/commons/thumb/6/65/Royal_Crown_of_France.svg/2354px-Royal_Crown_of_France.svg.png" >
+    <script>
+        function OrderClick(){
+          document.getElementById("lblName").innerHTML = document.getElementById("txtName").value;
+          document.getElementById("lblDate").innerHTML = document.getElementById("textdate").value;
+          document.getElementById("lblDays").innerHTML =  document.getElementById("textNo").value;
+          document.getElementById("lblPeople").innerHTML = document.getElementById("textpeople").value;
+          var Roomtype = "";
+          var RoomCost = 0;
+          var facilitiesName ="";
+          var facilitiesCost = 0;
+    
+          delexRadio = document.getElementById("Delex");
+          SuiteRadio = document.getElementById("Suite");
+
+          if(delexRadio.checked){
+            Roomtype = delexRadio.value;
+            RoomCost = 1500;
+            TotalCost=1500;
+          }
+          if(SuiteRadio.checked){
+            Roomtype = SuiteRadio.value;
+            RoomCost =500;
+            TotalCost=500;
+          }
+
+          ACRadio   =    document.getElementById("A/C");
+          ParkingRadio = document.getElementById("Parking");
+         
+          if(ACRadio.checked){
+            facilitiesName = ACRadio.value + "<br>";
+            facilitiesCost =200;
+            TotalCost =RoomCost + facilitiesCost;
+            
+
+          }
+          if(ParkingRadio.checked){
+            facilitiesName += ParkingRadio.value + "<br>";
+            facilitiesCost = 150;
+            TotalCost = RoomCost + facilitiesCost;
+          }
+          
+        
+          document.getElementById("lblRoom").innerHTML =RoomCost;
+          document.getElementById("lblfacilities").innerHTML =facilitiesCost;
+          document.getElementById("lblTotal").innerHTML=TotalCost;
+          
+         }
+    </script>
+    <style>
+        h5{
+            color: white;
+            margin: 3px;
+        }
+        p{
+            color: white;
+        }
+    </style>
+    
+</head>
+<body>
+    <header>
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark ">
+            <div class="container-fluid">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/65/Royal_Crown_of_France.svg/2354px-Royal_Crown_of_France.svg.png" height="40px" width="50px" class="m-1" >
+                <a class="navbar-brand" href="index.html">Royal</a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse " id="navbar">
+                    <ul class="navbar-nav">
+                        <li class="nav-item">
+                            <a class="nav-link active" href="index.html">Home</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#footer">Contact</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#footer">Support</a>
+                        </li>
+                    </ul>
+                </div>
+                <div class="text-end nav-item">
+                    <button type="button" class="btn btn-outline-light" data-bs-toggle="modal" data-bs-target="#examplemodal">Login</button>
+                    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#last-modal"><span class="bi bi-person"></span>Sign-up</button>
+                </div>
+            </div>
+        </nav>
+        <img src="https://cdn5.vectorstock.com/i/1000x1000/78/04/hotel-booking-word-concepts-banner-vector-29127804.jpg" class="m-1" height="700px" width="100%">
+    </header>
+    <section>
+        <div class="accordion" id="orderForm">
+            <!--Customer Details-->
+            <div class="accordion-item">
+                <div class="accordion-header">
+                    <button data-bs-target="#customer" data-bs-toggle="collapse" class="btn btn-dark w-100">Customer Details</button>
+                </div>
+                <div class="accordion-collapse collapse show" id="customer" data-bs-parent="#orderForm">
+                    <div class="accordion-body">
+                        <dl>
+                            <dt>Customer Name</dt>
+                            <dd><input type="text" class="form-control " id="txtName"</dd>
+                            <dt>Check in Date</dt>
+                            <dd><input type="date" class="form-control" id="textdate"</dd>
+                            <dt>Total No. of Days</dt>
+                            <dd><input type="number" min="1" class="form-control" id="textNo"</dd>
+                            <dt>Total  Persons</dt>
+                            <dd><input type="number" min="1"  class="form-control" id="textpeople"</dd>
+                        </dl>
+                    </div>
+                </div>
+            </div>
+            <!--Room type-->
+            <div class="accordion-item">
+                <div class="accordion-header">
+                    <button class="btn btn-dark w-100" data-bs-target="#Room" data-bs-toggle="collapse">Select Room Type</button>
+                </div>
+                <div class="accordion-collapse collapse hide" id="Room" data-bs-parent="#orderForm">
+                    <div class="accordion-body">
+                        <div class="row">
+                            <div class="card col">
+                                   <img src="https://cloudstorage.mosaic-collection.com/property/loeipalace/hotel-photos/accommodation/deluxe/deluxe_king-2.jpg" class="card-img-top" height="250">
+                                   <div class="card-header">
+                                    <h2>Delex Room</h2>
+                                   </div>
+                                   <div class="card-footer">
+                                     <h3><input type="radio" id="Delex" class="form-check-input" name="room"> &#8377;1500</h3>
+                                   </div>
+                            </div>
+                             <div class="card col">
+                                    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/07/Hotel-suite-living-room.jpg/800px-Hotel-suite-living-room.jpg" height="250" class="card-img-top">
+                                    <div class="card-header">
+                                        <h2>Suite Room</h2>
+                                    </div>
+                                    <div class="card-footer ">
+                                        <h3><input type="radio" id="Suite" name="room" class="form-check-input"> &#8377;500</h3>
+                                    </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+         <!--Room facilities-->
+
+        <div class="accordion-item">
+            <div class="accordion-header">
+                <button class="btn btn-dark w-100" data-bs-target="#facilities" data-bs-toggle="collapse">Select Facilities</button>
+            </div>
+            <div class="accordion-collapse collapse hide" id="facilities" data-bs-parent="#orderform">
+                <div class="accordion-body">
+                    <div class="row">
+                        <div class="card col-6">
+                        <a>
+                            <img src="https://www.lg.com/in/images/AC/RAC-Gallery/D-02.jpg" height="250" class="card-img-top">
+                        </a>
+                          <div class="card-header">
+                              <h2>A/C</h2>
+                          </div>
+                          <div class="card-footer">
+                            <h3><input type="radio" id="A/C" Name="Facilities" class="form-check-input"> &#8377;200</h3>
+                          </div>
+                        </div>
+                        <div class="card col-6">
+                           <a>
+                            <img src="https://crausa.com/wp-content/uploads/2018/11/Leasing-High-Density-Office-Space-Pay-Attention-to-Parking-1000x600.jpeg" height="250"  class="card-img-top">
+                           </a>
+                            <div class="card-header">
+                                <h2>Parking</h2>
+                            </div>
+                            <div class="card-footer">
+                                <h3><input type="radio" id="Parking" Name="Facilities" class="form-check-input"> &#8377;150</h3>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    
+        <button class="btn btn-primary m-1" type="button" data-bs-toggle="modal" data-bs-target=".modal" onclick="OrderClick()">Register</button>
+        <div class="modal">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h2>Bill Details</h2>
+                        <button  class="btn-close" data-bs-dismiss="modal"></button>
+                    </div>
+                    <div class="modal-body text-dark">
+                        <dl class="row">
+                            <dt class="col-4">Customer</dt>
+                            <dd class="col-8" id="lblName"></dd>
+                            <dt class="col-4">Check in Date</dt>
+                            <dd class="col-8" id="lblDate"></dd>
+                            <dt class="col-4">Total Days</dt>
+                            <dd class="col-8" id="lblDays"></dd>
+                            <dt class="col-4">Total Persons</dt>
+                            <dd class="col-8" id="lblPeople"></dd>
+                            <dt class="col-4">Room rent</dt>
+                            <dd class="col-8" id="lblRoom"></dd>
+                            <dt class="col-4">Facilities Price</dt>
+                            <dd class="col-8" id="lblfacilities"></dd>
+                            <dt class="col-4">Total</dt>
+                            <dd class="col-8" id="lblTotal"></dd>
+                        </dl>
+                    </div>
+                    <div class="modal-footer">
+                        <button data-bs-dismiss="modal" class="btn btn-primary">Oky</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+         
+        <!--Sign in -->
+        <div class="modal" id="examplemodal">
+          <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h2><span class="bi bi-person-fill"></span>Sign in</h2>
+                </div>
+                <div class="modal-body">
+                    <dl>
+                        <dt>Mail or Mobile Number</dt>
+                        <dd><input class="form-control" placeholder="Enter text" type="text"></dd>
+                        <dt>Password</dt>
+                        <dd><input class="form-control" placeholder="Enter Password" type="password"></dd>
+                    </dl>
+                </div>
+                <div class="modal-footer">
+                  <button data-bs-dismiss="modal" class="btn btn-danger m-1">Cancel</button>
+                  <button data-bs-dismiss="modal" class="btn btn-primary m-1">Confirm</button>
+                </div>
+            </div>
+          </div>
+        </div>
+
+        <!--Sign up-->
+        <div class="modal" id="last-modal">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                   <div class="modal-header">
+                    <h2>Create Account</h2>
+                   </div>
+                   <div class="modal-body">
+                      <dl>
+                        <dt>Your Name</dt>
+                        <dd><input type="text" placeholder="Enter First and Last Name" class="form-control"></dd>
+                        <dt>Mobile Number</dt>
+                        <dd><input class="form-control" type="tel" placeholder="Mobile Number"</dd>
+                        <dt>Email</dt>
+                        <dd><input class="form-control" placeholder="@" type="email"</dd>
+                        <dt>New Password</dt>
+                        <dd><input type="password" placeholder="Create a password" class="form-control" ></dd>
+                       </dl>
+                   </div>
+                   <div class="modal-footer">
+                    <button class="btn btn-danger" type="button" data-bs-dismiss="modal">Cancel</button>
+                    <button class="btn btn-primary" type="button" data-bs-dismiss="modal">Continue</button>
+                   </div>
+                </div>
+            </div>
+        </div>
+     
+    </section>
+    
+    <footer >
+         <div id="footer"  class="container-fluid bg-dark">
+            <div class="row">
+                <div class="col">
+                    <h5>About</h5>
+                    <p>Developer<p>
+                    <p>Career</p>
+                    <p>Hotel Book</p>
+                    <p>Learn More..</p>
+                </div>
+                <div class="col">
+                    <h5>Social</h5>
+                    <p>Telephone:****</p>
+                    <p>Contact Us <span class="bi bi-people-fill"></span></p>
+                    <p>Git Hub <span class="bi bi-github"></span></p>
+                    <p>Instagram  <span class="bi bi-instagram"></span></p>
+                </div>
+                <div class="col">
+                    <h5>Address</h5>
+                    <p>SDITS,indore road<br>khandwa(450001),<br>MP,India</p>
+                    <p><span class="bi bi-question-circle"></span>Help</p>
+                </div>
+                <div class="col">
+                    <h5>Technology(UI&UX)</h5> 
+                    <p>HTML 5.3</p>
+                    <p>CSS </p>
+                    <P>bootstrap v5.0</P>
+                    <P>JavaScript</P>
+                </div>
+             </div>
+         </div>
+    </footer>
+<!-- JavaScript Bundle with Popper -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3" crossorigin="anonymous"></script>
+<!-- JavaScript Bundle with Popper -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3" crossorigin="anonymous"></script>
+<script src="../Node_Modules/jquery/dist/jquery.js"></script>
+<script src="../Node_Modules/bootstrap/dist/js/bootstrap.bundle.js"></script>
+</body>
+</html>
